@@ -79,7 +79,7 @@ impl ADBServer {
     }
 
     /// Tracks new devices showing up.
-    pub fn track_devices(&mut self, callback: impl Fn(DeviceShort) -> Result<()>) -> Result<()> {
+    pub fn track_devices(&mut self, mut callback: impl FnMut(DeviceShort) -> Result<()>) -> Result<()> {
         self.connect()?
             .send_adb_request(AdbServerCommand::TrackDevices)?;
 
